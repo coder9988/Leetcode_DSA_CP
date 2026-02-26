@@ -1,4 +1,4 @@
-// Last updated: 2/26/2026, 11:27:48 PM
+// Last updated: 2/26/2026, 11:28:00 PM
 1class Solution {
 2public:
 3    ListNode* removeNthFromEnd(ListNode* head, int n) {
