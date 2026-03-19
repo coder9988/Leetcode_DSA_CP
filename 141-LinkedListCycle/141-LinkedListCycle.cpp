@@ -1,4 +1,4 @@
-// Last updated: 3/19/2026, 1:46:25 PM
+// Last updated: 3/19/2026, 1:49:06 PM
 1/**
 2 * Definition for singly-linked list.
 3 * struct ListNode {
@@ -9,17 +9,16 @@
 8 */
 9class Solution {
 10public:
-11    bool hasCycle(ListNode *head) {
-12        map<ListNode*,int> visited ;
-13        while(head!=NULL)
-14        {
-15            head = head->next;
-16            visited[head]++;
-17            if(visited[head]>1)
-18            {
-19                return true;
-20            }
-21        }
-22        return false;
-23    }
-24};
+11    bool hasCycle(ListNode* head) {
+12        map<ListNode*, int> visited;
+13        while (head != NULL) {
+14            if (visited[head] > 1) {
+15                return true;
+16            }
+17                        visited[head]++;
+18            head = head->next;
+19
+20        }
+21        return false;
+22    }
+23};
