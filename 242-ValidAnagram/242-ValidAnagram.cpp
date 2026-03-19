@@ -1,28 +1,27 @@
-// Last updated: 3/19/2026, 7:28:07 PM
+// Last updated: 3/19/2026, 7:30:14 PM
 1class Solution {
 2public:
 3    bool isAnagram(string s, string t) {
-4        sort(s.begin(),s.end());
-5        sort(t.begin(),t.end());
-6        // map<char,int> mp1;
-7        // map<char,int> mp2;
-8        if(s.size()!=t.size())
-9        {
-10            return false;
-11        }
-12        bool res = false;
-13        for(int i = 0;i<s.size();i++)
-14        {
-15            if(s[i]==t[i])
-16            {
-17                res = true;
-18            }
-19            else
-20            {
-21                return false;
-22            }
-23            cout<<res;
-24        }
-25        return res;
-26    }
-27};
+4                if(s.size()!=t.size())
+5        {
+6            return false;
+7        }
+8        sort(s.begin(),s.end());
+9        sort(t.begin(),t.end());
+10
+11        bool res = false;
+12        for(int i = 0;i<s.size();i++)
+13        {
+14            if(s[i]==t[i])
+15            {
+16                res = true;
+17            }
+18            else
+19            {
+20                return false;
+21            }
+22            cout<<res;
+23        }
+24        return res;
+25    }
+26};
