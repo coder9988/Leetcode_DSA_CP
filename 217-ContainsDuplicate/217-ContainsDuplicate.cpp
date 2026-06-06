@@ -1,12 +1,12 @@
-// Last updated: 3/20/2026, 11:48:35 PM
+// Last updated: 6/7/2026, 2:44:44 AM
 1class Solution {
 2public:
 3    bool containsDuplicate(vector<int>& nums) {
-4        unordered_map<int,int> mp;
-5        for(int i=0;i<nums.size();i++)
+4        unordered_map<int,int> freq;
+5        for(int i:nums)
 6        {
-7            mp[nums[i]]++;
-8            if(mp[nums[i]]>1)
+7            freq[i]++;
+8            if(freq[i]>1)
 9            {
 10                return true;
 11            }
