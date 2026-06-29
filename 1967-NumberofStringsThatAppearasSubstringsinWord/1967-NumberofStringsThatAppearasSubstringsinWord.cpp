@@ -1,4 +1,4 @@
-// Last updated: 6/30/2026, 12:17:27 AM
+// Last updated: 6/30/2026, 12:17:55 AM
 1class Solution {
 2public:
 3    int numOfStrings(vector<string>& patterns, string word) {
