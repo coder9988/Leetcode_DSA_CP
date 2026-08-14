@@ -1,48 +1,50 @@
-// Last updated: 7/12/2026, 1:41:13 AM
+// Last updated: 8/14/2026, 7:22:46 PM
 1class Solution {
 2public:
-3    int countCompleteComponents(int n, vector<vector<int>>& edges) {
-4        vector<vector<int>> adj(n);
-5
-6        for (auto &e : edges) {
-7            adj[e[0]].push_back(e[1]);
-8            adj[e[1]].push_back(e[0]);
-9        }
-10
-11        vector<bool> vis(n, false);
-12        int ans = 0;
-13
-14        for (int i = 0; i < n; i++) {
-15            if (vis[i]) continue;
-16
-17            queue<int> q;
-18            q.push(i);
-19            vis[i] = true;
-20
-21            int nodes = 0;//number of nodes in the component
-22            int edgeCount = 0; //total edges in the component
-23
-24            while (!q.empty()) {
-25                int u = q.front();
-26                q.pop();
-27
-28                nodes++;
-29                edgeCount += adj[u].size();
-30
-31                for (int v : adj[u]) {
-32                    if (!vis[v]) {
-33                        vis[v] = true;
-34                        q.push(v);
-35                    }
-36                }
-37            }
-38
-39            edgeCount /= 2;
-40
-41            if (edgeCount == nodes * (nodes - 1) / 2)
-42                ans++;
-43        }
+3    void dfs(vector<vector<int>>& graph, int node, vector<bool>& visited,
+4             int& vertices, int& edges) {
+5        
+6        visited[node] = true;
+7        vertices++;
+8        edges += graph[node].size();
+9
+10        for(int i:graph[node])
+11        {
+12            if(!visited[i])
+13            {
+14                dfs(graph,i,visited,vertices,edges);
+15            }
+16        }
+17    }
+18
+19    int countCompleteComponents(int n, vector<vector<int>>& edges) {
+20        vector<vector<int>> graph(n);
+21
+22        for (int i = 0; i < edges.size(); i++) {
+23            graph[edges[i][0]].push_back(edges[i][1]);
+24            graph[edges[i][1]].push_back(edges[i][0]);
+25        }
+26
+27        vector<bool> visited(n, false);
+28        int ans = 0;
+29        for(int i =0;i<n;i++)
+30        {
+31            if(!visited[i])
+32            {
+33            int vertices = 0;
+34            int totaldegree = 0;
+35            dfs(graph,i,visited,vertices,totaldegree);
+36
+37            int actualedges = totaldegree/2;
+38            int required = vertices*(vertices-1)/2;
+39            if(actualedges == required)
+40            {
+41                ans += 1;
+42            }
+43            }
 44
-45        return ans;
-46    }
-47};
+45        }
+46       
+47        return ans;
+48    }
+49};
