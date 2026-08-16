@@ -1,4 +1,4 @@
-// Last updated: 6/22/2026, 2:57:36 PM
+// Last updated: 8/16/2026, 2:24:24 PM
 1/**
 2 * Definition for a binary tree node.
 3 * struct TreeNode {
@@ -13,15 +13,14 @@
 12class Solution {
 13public:
 14    TreeNode* invertTree(TreeNode* root) {
-15                if(root==NULL)
+15        if(root == nullptr)
 16        {
 17            return root;
 18        }
-19        root->left = invertTree(root->left);
-20        TreeNode* temp = root->left;
+19        TreeNode* temp = root;
+20        root->left = invertTree(root->left);
 21        root->right = invertTree(root->right);
-22        root->left = root->right;
-23        root->right = temp;
-24        return root;
-25    }
-26};
+22        swap(temp->left,temp->right);
+23        return temp;
+24    }
+25};
