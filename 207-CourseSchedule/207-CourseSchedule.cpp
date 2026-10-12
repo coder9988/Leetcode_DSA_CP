@@ -1,35 +1,37 @@
-// Last updated: 10/8/2026, 7:29:29 PM
+// Last updated: 10/12/2026, 11:02:28 PM
 1class Solution {
-2public:
-3    bool dfs(int start, vector<vector<int>> &graph, vector<bool>& vis,
-4             vector<bool>& path) {
-5        vis[start] = true;
-6        path[start] = true;
-7        for (int neighbor : graph[start]) {
-8            if (!vis[neighbor]) {
-9                if (dfs(neighbor, graph, vis, path)) {
-10                    return true;
-11                }
-12            } else if (path[neighbor]) {
-13                return true;
-14            }
-15        }
-16        path[start] = false;
+2private:
+3    bool dfs(vector<vector<int>>& dg, int node, vector<bool>& vis,  vector<bool>& currPath ){
+4        if(currPath[node]) return true;
+5        if(vis[node]) return false;
+6
+7        vis[node] = true;
+8        currPath[node] = true;
+9
+10        for(int i : dg[node]){
+11            if(dfs(dg, i, vis, currPath)){
+12                return true;
+13            }
+14        }
+15
+16        currPath[node] = false;
 17        return false;
 18    }
-19    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-20        vector<bool> path(numCourses, false);
-21        vector<bool> vis(numCourses, false);
-22        vector<vector<int>> graph(numCourses);
-23        for (auto edges : prerequisites) {
-24            graph[edges[1]].push_back(edges[0]);
-25        }
-26        for (int i = 0; i < numCourses; i++) {
-27            if (!vis[i]) {
-28                if (dfs(i, graph, vis, path))
-29                    return false;
-30            }
-31        }
-32        return true;
-33    }
-34};
+19public:
+20    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+21        vector<vector<int>> dg(numCourses);
+22        vector<bool> vis(numCourses, false);
+23        vector<bool> currPath(numCourses, false);
+24
+25        for(auto prerequisite : prerequisites){
+26           dg[prerequisite[0]].push_back(prerequisite[1]);
+27        }
+28
+29        for(int i =0;i<numCourses;i++){
+30            if(!vis[i] && dfs(dg, i, vis, currPath)){
+31                return false;
+32            }
+33        }
+34        return true;
+35    }
+36};
